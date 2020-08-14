@@ -1,0 +1,101 @@
+﻿@page "/"
+@using GuidGen.Web.Models
+
+@inject IJSRuntime JSRuntime
+
+<article style="margin-bottom: 20px">
+    <Row Class="justify-content-center postcontent">
+        <Column ColumnSize="ColumnSize.Is12" Class="entry-content">
+            <div class="input-group input-group-lg mb-4">
+                <Addons>
+                    <Addon AddonType="AddonType.Body">
+                        <TextEdit value="@GeneratedValue" Size="Size.Large"/>
+                    </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Primary" Clicked="@(CopyTextToClipboard)">
+                            <Text Transform="TextTransform.Uppercase">copy</Text>
+                        </Button>
+                    </Addon>
+                </Addons>
+            </div>
+            <Row Class="justify-content-around mb-4">
+                <Column ColumnSize="ColumnSize.Is3">
+                    <Text Transform="@(Options.Uppercase ? TextTransform.Lowercase : TextTransform.Uppercase)" @onclick="@(Options.ToggleCase)">
+                        @(Options.Uppercase ? "lowercase": "uppercase")
+                    </Text>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is3">
+                    <Text @onclick="@(Options.ToggleBrackets)">
+                        @(Options.Brackets ? "No Brackets" : "Brackets")
+                    </Text>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is3">
+                    <Text @onclick="@(Options.ToggleHyphens)">
+                        @(Options.Hyphens ? "No Hyphens" : "Hyphens")
+                    </Text>
+                </Column>
+            </Row>
+            <div class="d-flex justify-content-center p-2 mb-5">
+                <Button Color="Color.Primary" Clicked="@(Generate)">
+                    <Text Transform="TextTransform.Uppercase">generate</Text>
+                </Button>
+            </div>
+        </Column>
+    </Row>
+</article>
+<Snackbar @ref="snackbar" Interval="2000" Location="SnackbarLocation.Right">
+    <SnackbarBody>
+        <div class="text-center">
+            <Text Color="TextColor.White">Copied!</Text>
+        </div>
+    </SnackbarBody>
+</Snackbar>
+
+@code {
+    private Guid _generatedValue;
+
+    private string GeneratedValue
+    {
+        get
+        {
+            var guid = _generatedValue.ToString(Options.Brackets ? "B" : "D");
+
+            if (Options.Uppercase)
+            {
+                guid = guid.ToUpperInvariant();
+            }
+            else
+            {
+                guid = guid.ToLowerInvariant();
+            }
+
+            if (!Options.Hyphens)
+            {
+                guid = guid.Replace("-", string.Empty);
+            }
+
+            return guid;
+        }
+    }
+
+    private GuidGeneratorOptions Options { get; set; } = new GuidGeneratorOptions();
+
+    private Snackbar snackbar;
+
+    protected override void OnInitialized()
+    {
+        Generate();
+    }
+
+    private void Generate()
+    {
+        _generatedValue = Guid.NewGuid();
+    }
+
+    private async Task CopyTextToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", GeneratedValue);
+        snackbar.Show();
+    }
+
+}
