@@ -20,11 +20,11 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish Locally
-      run: dotnet publish --configuration Release --no-build -o guid
+      run: dotnet publish --configuration Release --no-build -o dist
     - name: Publish Netlify
       uses: netlify/actions/cli@master
       with:
-        args: deploy --dir=./guid --prod
+        args: deploy --dir=./guid/dist --prod
       env: 
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
