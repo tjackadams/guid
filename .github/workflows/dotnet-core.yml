@@ -1,4 +1,4 @@
-name: Netlify
+name: Guid Generator
 
 on:
   push:
