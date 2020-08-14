@@ -23,9 +23,9 @@ jobs:
       run: dotnet publish --configuration Release --no-build -o ./
     - name: Publish Netlify
       uses: netlify/actions/cli@master
-      env: 
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 
       with:
-          args: deploy --dir=BlazorOnNetlify/dist --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+        args: deploy --dir=guid/dist --prod
+      env: 
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
