@@ -24,10 +24,6 @@ namespace GuidGen.Web
 
             var host = builder.Build();
 
-            host.Services
-                .UseBootstrapProviders()
-                .UseFontAwesomeIcons();
-
             await host.RunAsync();
         }
     }

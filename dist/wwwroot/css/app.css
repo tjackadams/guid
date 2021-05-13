@@ -1,0 +1,134 @@
+﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
+
+#blazor-error-ui {
+  background: lightyellow;
+  bottom: 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+  display: none;
+  left: 0;
+  padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: Segoe UI, "Segoe UI Web Regular", "Segoe UI Regular WestEuropean",
+    "Segoe UI", Tahoma, Arial, Roboto, "Helvetica Neue", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: #333;
+  text-align: left;
+  background-color: #fff;
+}
+
+body.custom-background {
+  background-color: #f4f4f4;
+}
+
+a {
+  color: #005da6;
+  text-decoration: underline;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+dl,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+  font-family: Segoe UI;
+  line-height: 1.2;
+  color: inherit;
+}
+
+.wrapper {
+  padding: 30px 0;
+}
+
+.herocontent {
+  max-height: 250px;
+  padding: 6% 0;
+  text-align: left;
+}
+
+h1.herotitle {
+  font-size: 36px;
+  font-family: "Segoe UI Semibold";
+  line-height: 42px;
+  color: #110f0f;
+  letter-spacing: -2%;
+}
+
+@media screen and (max-width: 567px) {
+  h1.herotitle {
+    font-size: 32px;
+  }
+}
+
+h1.herotitle.text-md-left,
+p.herotext.text-md-left {
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+}
+
+.postcontent .entry-content p {
+  word-break: break-word;
+}
+
+.postcontent {
+  margin-bottom: 2px;
+  padding-top: 60px;
+  padding-left: 16%;
+  padding-right: 16%;
+  background-color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .postcontent {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .entry-content {
+    margin-top: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .entry-content {
+    margin-top: 14px;
+  }
+}
+
+h1.entry-title {
+  text-align: center;
+  font-size: 1.8rem;
+}
