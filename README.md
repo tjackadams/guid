@@ -1,4 +1,4 @@
-![Guid Generator](https://github.com/tjackadams/guid/workflows/Guid%20Generator/badge.svg) [![Netlify Status](https://api.netlify.com/api/v1/badges/7315fd19-712c-49f3-b2b8-de72cb06141c/deploy-status)](https://app.netlify.com/sites/compassionate-cray-f8ecd0/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7315fd19-712c-49f3-b2b8-de72cb06141c/deploy-status)](https://app.netlify.com/sites/compassionate-cray-f8ecd0/deploys)
 
 # Guid Generator
 
