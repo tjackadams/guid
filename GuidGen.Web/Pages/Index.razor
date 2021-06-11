@@ -25,19 +25,13 @@
             </div>
             <Row Class="justify-content-around mb-4">
                 <Column ColumnSize="ColumnSize.Is3">
-                    <Text Transform="@(Options.Uppercase ? TextTransform.Lowercase : TextTransform.Uppercase)" @onclick="@(Options.ToggleCase)">
-                        @(Options.Uppercase ? "lowercase": "uppercase")
-                    </Text>
+                    <Switch TValue="bool" @bind-Checked="@Options.Uppercase">Uppercase</Switch>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <Text @onclick="@(Options.ToggleBrackets)">
-                        @(Options.Brackets ? "No Brackets" : "Brackets")
-                    </Text>
+                    <Switch TValue="bool" @bind-Checked="@Options.Brackets">Include brackets</Switch>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <Text @onclick="@(Options.ToggleHyphens)">
-                        @(Options.Hyphens ? "No Hyphens" : "Hyphens")
-                    </Text>
+                    <Switch TValue="bool" @bind-Checked="@Options.Hyphens">Include hyphens</Switch>
                 </Column>
             </Row>
             <div class="d-flex justify-content-center p-2 mb-5">

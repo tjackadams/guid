@@ -9,22 +9,8 @@ namespace GuidGen.Web.Models
             Hyphens = true;
         }
 
-        public bool Uppercase { get; private set; }
-        public bool Brackets { get; private set; }
-        public bool Hyphens { get; private set;  }
-        public void ToggleCase()
-        {
-            Uppercase = !Uppercase;
-        }
-
-        public void ToggleBrackets()
-        {
-            Brackets = !Brackets;
-        }
-
-        public void ToggleHyphens()
-        {
-            Hyphens = !Hyphens;
-        }
+        public bool Uppercase { get; set; }
+        public bool Brackets { get; set; }
+        public bool Hyphens { get; set;  }
     }
 }
