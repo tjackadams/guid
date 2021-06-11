@@ -6,6 +6,7 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace GuidGen.Web
 {
@@ -14,6 +15,9 @@ namespace GuidGen.Web
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
             builder.RootComponents.Add<App>("#app");
 
             builder.Services

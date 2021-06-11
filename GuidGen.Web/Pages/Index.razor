@@ -1,7 +1,10 @@
 ﻿@page "/"
 @using GuidGen.Web.Models
+@using Microsoft.Extensions.Logging;
 
+@inject ILogger<Index> logger;
 @inject IJSRuntime JSRuntime
+
 
 <article style="margin-bottom: 20px">
     <Row Class="justify-content-center postcontent">
@@ -9,7 +12,9 @@
             <div class="input-group input-group-lg mb-4">
                 <Addons>
                     <Addon AddonType="AddonType.Body">
-                        <TextEdit value="@GeneratedValue" Size="Size.Large"/>
+                        <TextEdit Text="@GeneratedValue" Size="Size.Large" ReadOnly="true">
+
+                        </TextEdit>
                     </Addon>
                     <Addon AddonType="AddonType.End">
                         <Button Color="Color.Primary" Clicked="@(CopyTextToClipboard)">
@@ -81,11 +86,9 @@
     private GuidGeneratorOptions Options { get; set; } = new GuidGeneratorOptions();
 
     private Snackbar snackbar;
-
     protected override void OnInitialized()
     {
         Generate();
-        StateHasChanged();
     }
 
     private void Generate()
