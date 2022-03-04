@@ -93,7 +93,7 @@
     private async Task CopyTextToClipboard()
     {
         await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", GeneratedValue);
-        snackbar.Show();
+        await snackbar.Show();
     }
 
 }
