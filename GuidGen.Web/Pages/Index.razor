@@ -4,6 +4,7 @@
 
 @inject ILogger<Index> logger;
 @inject IJSRuntime JSRuntime
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 
 <article style="margin-bottom: 20px">
@@ -25,13 +26,13 @@
             </div>
             <Row Class="justify-content-around mb-4">
                 <Column ColumnSize="ColumnSize.Is3">
-                    <Switch TValue="bool" @bind-Checked="@Options.Uppercase">Uppercase</Switch>
+                    <Switch TValue="bool" Checked="@Options.Uppercase" CheckedChanged="@OnUppercaseChanged">Uppercase</Switch>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <Switch TValue="bool" @bind-Checked="@Options.Brackets">Include brackets</Switch>
+                    <Switch TValue="bool" Checked="@Options.Brackets" CheckedChanged="@OnBracketsChanged">Include brackets</Switch>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is3">
-                    <Switch TValue="bool" @bind-Checked="@Options.Hyphens">Include hyphens</Switch>
+                    <Switch TValue="bool" Checked="@Options.Hyphens" CheckedChanged="@OnHyphensChanged">Include hyphens</Switch>
                 </Column>
             </Row>
             <div class="d-flex justify-content-center p-2 mb-5">
@@ -59,14 +60,7 @@
         {
             var guid = _generatedValue.ToString(Options.Brackets ? "B" : "D");
 
-            if (Options.Uppercase)
-            {
-                guid = guid.ToUpperInvariant();
-            }
-            else
-            {
-                guid = guid.ToLowerInvariant();
-            }
+            guid = Options.Uppercase ? guid.ToUpperInvariant() : guid.ToLowerInvariant();
 
             if (!Options.Hyphens)
             {
@@ -80,8 +74,15 @@
     private GuidGeneratorOptions Options { get; set; } = new GuidGeneratorOptions();
 
     private Snackbar snackbar;
-    protected override void OnInitialized()
+
+    protected override async Task OnInitializedAsync()
     {
+        var options = await localStorage.GetItemAsync<GuidGeneratorOptions>("options");
+        if (options != null)
+        {
+            Options = options;
+        }
+
         Generate();
     }
 
@@ -94,6 +95,27 @@
     {
         await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", GeneratedValue);
         await snackbar.Show();
+    }
+
+    private async Task OnUppercaseChanged(bool value)
+    {
+        Options.Uppercase = value;
+
+        await localStorage.SetItemAsync("options", Options);
+    }
+
+    private async Task OnBracketsChanged(bool value)
+    {
+        Options.Brackets = value;
+
+        await localStorage.SetItemAsync("options", Options);
+    }
+
+    private async Task OnHyphensChanged(bool value)
+    {
+        Options.Hyphens = value;
+
+        await localStorage.SetItemAsync("options", Options);
     }
 
 }
